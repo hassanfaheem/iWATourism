@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+
+        {% include 'main/shared/header.html' %}
+    </head>
+
+    <body>
+        {% include 'ae/shared/navbar.html' %}
+        {% include 'main/shared/socials.html' %}
+
+        {% block content %}
+
+        {% endblock content %}
+
+        {% include 'ae/shared/footer.html' %}
+        {% include 'main/shared/body_tags.html' %}
+    </body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+
+<footer>
+    <div class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer__title">Get In Touch</h6>
+                    <div class="widget_list">
+                        <ul>
+                            <li><a class="text-light" href="https://maps.app.goo.gl/WFjuhjoHCqztRMb66"><p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Suite 901, 904, Al Moosa Tower 2, Sheikh Zayed Road, Trade Center 1, Dubai, UAE</p></a></li>
+                            <li><a class="text-light" href="tel:+97142727777"><p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+971 4 272 7777</p></a></li>
+                            <li><a class="text-light" href="https://wa.me/+971555530083"><p class="mb-2"><i class="fab fa-whatsapp me-3"></i>+971 55 553 0083</p></a></li>
+                            <li><a class="text-light" href="mailto:info@iwatourism.com"><p class="mb-2"><i class="fa fa-envelope me-3"></i>info@iwatourism.com</p></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer__title">Destinations</h6>
+                    <div class="widget_list">
+                        <ul>
+                            {% block destinations %}
+                            {% endblock destinations %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer__title">iWA Group of Companies</h6>
+                    <div class="widget_list">
+                        <ul>
+                            <li><a href="{% url 'home' %}">iWA Tourism</a></li>
+                            <li><a href="https://www.iwaproperties.com/" target="_blank" rel="noopener noreferrer">iWA Properties</a></li>
+                            <li><a href="https://www.iwacitizenships.com/" target="_blank" rel="noopener noreferrer">iWA Citizenships</a></li>
+                            <li><a href="#">iWA Truck</a></li>
+                            <li><a href="#">iWA Cars</a></li>
+                            <li><a href="#">iWA Technologies</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer__title text-center">Check Out Our Socials</h6>
+                    <div class="d-flex justify-content-center py-4">
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-tiktok"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__wrapper">
+        <div class="container">
+            <p class="footer__copy">&copy; 2023 <a class="border-bottom" href="#">iWA Tourism</a>, All Rights Reserved.</p><span class="footer__backtotop" id="back-to-top"> <i class="fa fa-arrow-up me-2"></i>Back to top</span>
+        </div>
+    </div>
+</footer>

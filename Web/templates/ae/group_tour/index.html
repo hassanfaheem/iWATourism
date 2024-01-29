@@ -1,0 +1,36 @@
+{% extends "in/main.html" %}
+
+{% load static %}
+{% load humanize %}
+{% load customize_text %}
+
+{% block title %}Group Tours - iWA Tourism{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="p-4">
+        <div class="title title__style-02">
+            <h1 class="title__title text-center">Tours from UAE</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card card-body">
+                    <form method="get">
+                        {{ filter.form }}
+                        <input class="btn main-bg text-light w-100 my-3 py-3" type="Submit" value="Filter" />
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                {% include 'main/group_tour/_group_tours.html' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+    </div>
+</section>
+
+{% endblock content %}

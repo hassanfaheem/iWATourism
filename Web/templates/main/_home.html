@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="md-content">
+    <div class="container-fluid header bg-white p-0">
+        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <div class="col-md-5 p-5 mt-lg-5">
+                <div class="text-center">
+                    <h2 class="title__title">Welcome to <span class="main-color">iWA Tourism</span></h2>
+                    <p>Pick a Trip of Your Liking &amp; Let Us Take Care of Everything Else</p>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="d-flex flex-column bg-black align-items-center justify-content-center">
+                    {% with "videos/"|add:country_code|add:".mp4" as video %}
+                        <video autoplay muted loop id="myVideo" class="hero-video">
+                            <source src="{% static video %}" type="video/mp4">
+                        </video>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="py-5">
+        <div class="container">
+            <div class="title title__style-02">
+                <h2 class="title__title text-center">Our Tours</h2>
+            </div>
+            {% include 'main/group_tour/_group_tours.html' %}
+            <div class="d-flex justify-content-center mt-5">
+                {% if country_code == 'ae' %}
+                    <a class="md-btn md-btn--primary md-btn--pill" href="{% url 'group-tours' %}">Explore More Trips</a>
+                {% else %}
+                    <a class="md-btn md-btn--primary md-btn--pill" href="{% url 'group-tours' country_code %}">Explore More Trips</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</div>

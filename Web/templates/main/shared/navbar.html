@@ -1,0 +1,24 @@
+{% load static %}
+
+<header class="header skin-dark">
+    <div class="container-fluid p-0">
+        <div class="header__inner">
+            <div class="header__logo_menu_wrap">
+                <div class="header__logo"><a href="{% url 'home' %}"><img src="{% static 'img/logo/logo-white.png' %}" alt="logo" style="width: 60px;"></a></div>
+                <div class="header__menu">
+                    <nav class="onepage-nav">
+                        <ul class="onepage-menu">
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'group-tours' %}">Fixed Departures from UAE</a></li>
+                            <li><a href="{% url 'group-tours' 'in' %}">Fixed Departures from India</a></li>
+                            {% comment %} <li><a href="{% url 'iwa-group-of-companies' %}">iWA Group of Companies</a></li> {% endcomment %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="header__hotline_book_wrap">
+                <div class="header__hotline"><span><i class="fa fa-phone me-2"></i>Contact</span><a href="tel:+97142727777">+971 4 272 7777</a></div>
+            </div>
+        </div>
+    </div>
+</header>

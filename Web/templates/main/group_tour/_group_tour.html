@@ -1,0 +1,210 @@
+{% load static %}
+{% load humanize %}
+{% load customize_text %}
+{% load embed_video_tags %}
+
+<div class="md-content">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-7 col-xl-8">
+                <div class="grid-item cat1 cat4">
+                    <div class="grid-item__inner">
+                        <div class="grid-item__content-wrapper">
+                            <div class="box-image3">
+                                <div class="box-image3__box">
+                                    <div class="d-flex flex-column align-items-center main-bg">
+                                        <h6 class="m-0 px-4 text-light">{{ group_tour.title }}</h6>
+                                        <p class="m-0 px-4 text-light">{{ group_tour.from_date|date:"d M, Y" }} - {{ group_tour.to_date|date:"d M, Y" }}</p>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        {% if group_tour.sold_out %}
+                                            <div class="bg-danger rounded text-white position-absolute end-0 bottom-0 m-4 py-1 px-3">Sold Out</div>
+                                        {% endif %}
+                                        <img class="pe-none" src="{{ group_tour.image.url }}" alt=""/>
+                                    </div>
+                                </div>
+                                <div class="box-image3__info_right p-3">
+                                    <h5 class="box-image3__tour main-color">
+                                        {% if country_code == 'ae' %}
+                                            <a href="{% url 'view-group-tour-default' group_tour.id %}">{{ group_tour.from_city }} &#9992; {{ group_tour.to_city }}</a>
+                                        {% else %}
+                                            <a href="{% url 'view-group-tour-region' country_code group_tour.id %}">{{ group_tour.from_city }} &#9992; {{ group_tour.to_city }}</a>
+                                        {% endif %}
+                                    </h5>
+                                    <p class="image3__text fw-bold">{{ group_tour.days }} Days / {{ group_tour.nights }} Nights</p>
+                                    <p class="box-image3__text">
+                                        {% with group_tour.included|split as included %}
+                                            {% for item in included %}
+                                                <i class="fa-solid fa-check me-2 text-success"></i>{{ item }}<br />
+                                            {% endfor %}
+                                        {% endwith %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-4 border-top border-bottom mb-4">
+                    <ul class="list-group list-group-borderless list-group-horizontal row">
+                        <li class="col-md-4 flex-horizontal-center text-lh-sm mb-2">
+                            <div class="ml-1 text-dark"><i class="fa-regular fa-sun me-2"></i>{{ group_tour.days }} Days</div>
+                        </li>
+                        <li class="col-md-4 flex-horizontal-center text-lh-sm mb-2">
+                            <div class="ml-1 text-dark"><i class="fa-regular fa-moon me-2"></i>{{ group_tour.nights }} Nights</div>
+                        </li>
+                        <li class="col-md-4 flex-horizontal-center text-lh-sm mb-2">
+                            <div class="ml-1 text-dark"><i class="fa-solid fa-users me-2"></i>{{ group_tour.total_seats }} Total Seats</div>
+                        </li>
+                        <li class="col-md-4 flex-horizontal-center text-lh-sm mb-2">
+                            <div class="ml-1 text-dark">
+                                <i class="fa-solid fa-calendar-days me-2"></i>{{ group_tour.from_date|date:"d M, Y" }} - {{ group_tour.to_date|date:"d M, Y" }}
+                            </div>
+                        </li>
+                        <li class="col-md-4 flex-horizontal-center text-lh-sm mb-2">
+                            <div class="ml-1 text-dark">
+                                <i class="fa-regular fa-calendar-xmark me-2"></i>Deadline: {{ group_tour.booking_end_date|date:"d M, Y" }}
+                            </div>
+                        </li>
+                        <li class="col-md-4 flex-horizontal-center text-lh-sm mb-2">
+                            <i class="flaticon-pin text-primary font-size-22 mr-2 d-block me-2"></i>
+                            <div class="ml-1 text-dark">
+                                <div class="btn btn-success" style="pointer-events: none;">Available</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-bottom position-relative">
+                    <h5 class="main-color font-size-21 font-weight-bold mb-3">
+                        Description
+                    </h5>
+                    <p class="mb-4">{{ group_tour.description|safe|linebreaks }}</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h6 class="main-color font-weight-bold mb-3">Included</h6>
+                            {% with group_tour.included|split as included %}
+                                {% for item in included %}
+                                    <div class="flex-horizontal-center mb-3 text-gray-1"><i class="fa-solid fa-check me-2 text-success"></i>{{ item }}</div>
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h6 class="main-color font-weight-bold mb-3">Not Included</h6>
+                            {% with group_tour.not_included|split as not_included %}
+                                {% for item in not_included %}
+                                    <div class="flex-horizontal-center mb-3 text-gray-1"><i class="fa-solid fa-xmark me-2 text-danger"></i>{{ item }}</div>
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom position-relative">
+                    <h5 class="main-color font-size-21 font-weight-bold text-dark mb-3">
+                        Itinerary
+                    </h5>
+                    {% for itinerary in group_tour.itinerary_set.all %}
+                        <h6 class="main-color text-center mb-4">Day {{ itinerary.day }} - {{ itinerary.date }}</h6>
+                        <p class="mb-4">{{ itinerary.description|safe|linebreaks }}</p>
+                        <hr class="dotted">
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="book-now" class="col-lg-5 col-xl-4">
+                <div>
+                    <div class="border border-color-7 rounded">
+                        <div class="border-bottom">
+                            <div class="p-4">
+                                <h6 class="main-color">Total: <span id="total_price" class="font-size-24 text-gray-6 font-weight-bold ml-1"></span></h6>
+                                <p>Booking Amount*: <span id="booking_amount" class="font-size-24 text-gray-6 font-weight-bold ml-1"></span></p>
+                                <p style="font-size: smaller;">*20% of the total amount to be paid at booking, and 80% after visa approval.</p>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="mb-4">
+                                <div class="border-bottom border-width-2 border-color-1 pb-1">
+                                    <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
+                                        <form method="POST" action="" enctype="multipart/form-data">
+                                            {% if form.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ form.errors }}
+                                                </div>
+                                            {% endif %}
+                                            {% csrf_token %}
+                                            {{ form.package.label }}
+                                            {{ form.package }}
+                                            {{ form.add_on.label }}
+                                            {{ form.add_on }}
+                                            <p id="add-on-description" class="font-size-24 text-gray-6 font-weight-bold ml-1"></p>
+                                            {{ form.consent.label }}
+                                            {{ form.consent }}
+                                            <div id="customerFormContainer" style="display: none;">
+                                                {{ customer_form.as_p }}
+                                                <input class="btn btn-dark border-0 w-100 py-3" type="Submit" value="Book Now" />
+                                            </div>
+                                        </form>
+                                        <div class="form-group py-4">
+                                            <button class="btn btn-dark border-0 w-100 py-3" id="bookNowButton">Book Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if group_tour.video %}
+                            <div class="d-flex justify-content-center py-3">
+                                {% video group_tour.video 'tiny'%}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var packageID = "#package-id"
+        var addOnID = "#add-on-id"
+
+        $("#bookNowButton").click(function(){
+            $(this).addClass("hidden");
+            $("#customerFormContainer").show();
+        });
+
+        function updatePrice() {
+            $.ajax({
+                url: "{% url 'get-price' country_code %}",
+                data: {
+                    package_id: $(packageID).val(),
+                    add_on_id: $(addOnID).val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var total_price = data.total_price;
+                    var booking_amount = data.booking_amount;
+
+                    var add_on_description = data.add_on_description;
+
+                    $("#total_price").text(total_price);
+                    $("#booking_amount").text(booking_amount);
+                    $("#add-on-description").text(add_on_description);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        $(packageID).change(function () {
+            updatePrice();
+        });
+
+        $(addOnID).change(function () {
+            updatePrice();
+        });
+
+        updatePrice();
+    });
+</script>
