@@ -150,3 +150,7 @@ def booking_payment(request, booking_id):
 
 def iwa_group_of_companies(request):
     return render(request, 'main/iwa_group_of_companies.html', {})
+
+# Theme
+def theme_home(request):
+    return render(request, 'theme/home.html', {})

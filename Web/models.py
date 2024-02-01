@@ -8,11 +8,11 @@ from django_countries.fields import CountryField
 import os
 
 FROM_CITIES = (
-    # UAE
+# UAE
     ('Abu Dhabi', 'Abu Dhabi'),
     ('Dubai', 'Dubai'),
     ('Sharjah', 'Sharjah'),
-    # India
+# India
     ('Bengaluru', 'Bengaluru'),
     ('Chennai', 'Chennai'),
     ('Mumbai', 'Mumbai'),
@@ -26,11 +26,11 @@ FROM_CITIES = (
 )
 
 TO_CITIES = (
-    # UAE
+# UAE
     ('Abu Dhabi', 'Abu Dhabi'),
     ('Dubai', 'Dubai'),
     ('Sharjah', 'Sharjah'),
-    # Georgia
+# Georgia
     ('Tbilisi', 'Tbilisi')
 )
 

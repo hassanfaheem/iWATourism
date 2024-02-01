@@ -135,11 +135,11 @@
                                             {{ form.add_on.label }}
                                             {{ form.add_on }}
                                             <p id="add-on-description" class="font-size-24 text-gray-6 font-weight-bold ml-1"></p>
-                                            {{ form.consent.label }}
-                                            {{ form.consent }}
                                             <div id="customerFormContainer" style="display: none;">
                                                 {{ customer_form.as_p }}
-                                                <input class="btn btn-dark border-0 w-100 py-3" type="Submit" value="Book Now" />
+                                                {{ form.consent.label }}
+                                                {{ form.consent }}
+                                                <input class="btn btn-dark border-0 w-100 py-3" type="Submit" value="Book Tour" />
                                             </div>
                                         </form>
                                         <div class="form-group py-4">
